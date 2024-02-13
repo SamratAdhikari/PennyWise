@@ -42,26 +42,26 @@
 
 
     let income_vs_expense_chart = new Chart(income_vs_expense, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
             labels: ['Income', 'Expense'],
                 datasets: [{
-                    label: "Income Vs Expense",
+                    label: "Income Vs Expenses",
                     data: income_vs_expense_data,
-                    backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                    backgroundColor: ['#006A4D', '#B32D2D', '#60BD68',
                         '#B276B2', '#E16851', '#FB8267'],
 
                     borderWidth: 1,
                     hoverBorderColor: "black",
                     hoverBorderWidth: 2,
-                    hoverBackgroundColor: 'rgba(154, 245, 140)',
+                    hoverBackgroundColor: '#043D5B',
                     pointHoverRadius: 5
                 }],
             },
             options: {
                     title: {
                         display: true,
-                            text: "Income Vs Expense",
+                            text: "Income Vs Expenses",
                                 fontSize: 20,
                     },
                     legend: {
@@ -78,18 +78,9 @@
             }
         })
 
-        // console.log('datas', {{ income_category | safe}});
-        
 
         let income_category_data = {{ income_category | safe}};
 
-        // let income_category_data = [];
-
-        // for (let key in income_categories) {
-        //     income_category_data.push([parseInt(key), income_categories[key]]);
-        // }
-
-        
         // Extract labels from income_category_data
         let labels = income_category_data.map(item => item[1]);
         
@@ -97,34 +88,26 @@
         // Filter labels and corresponding data
         let filteredData = income_category_data.filter(item => ['Salary', 'Investment', 'Rent', 'Hustle', 'Food', 'Entertainment'].includes(item[1]));
         let incomeData = filteredData.map(item => item[0]);
-        
-        console.log(incomeData);
-
-        Chart.scaleService.updateScaleDefaults('linear', {
-            ticks: {
-                min: 0
-            }
-        });
 
         let income_vs_category_chart = new Chart(income_vs_category, {
             type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: "Categories Of Income",
+                    label: "",
                     data: incomeData,
                     backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68', '#B276B2', '#E16851', '#FB8267'],
                     borderWidth: 1,
                     hoverBorderColor: "black",
                     hoverBorderWidth: 2,
-                    hoverBackgroundColor: 'rgba(154, 245, 140)',
+                    hoverBackgroundColor: '#043D5B',
                     pointHoverRadius: 5
                 }],
             },
             options: {
                 title: {
                     display: true,
-                    text: "Income Categories",
+                    text: "Category",
                     fontSize: 20,
                 },
                 legend: {
@@ -132,7 +115,7 @@
                     labels: {
                         fontColor: "gray"
                     },
-                    display: true,
+                    display: false,
                 },
                 elements: {
                     hitRadius: 3,
@@ -148,10 +131,10 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: "Expenditure Over Time",
+                    label: "Transaction",
                     data: over_time_expenditure,
                     fill: false,
-                    borderColor: "rgb(75, 192, 192)",
+                    borderColor: "#043D5B",
                     lineTension: 0.1
                 }]
             },
@@ -159,25 +142,6 @@
         });
 
 
-        over_time_expenditure = JSON.parse({{over_time_expenditure | tojson}});
-        labels = JSON.parse({{ dates_label  | tojson}});
-
-        new Chart(document.getElementById("overtime_expenditure"), {
-                type: "line",
-                data:
-                {
-                    labels: labels,
-                    datasets: [{
-                        label: "Expenditure Over Time",
-                        
-                        data: over_time_expenditure,
-                        fill: false,
-                        borderColor: "rgb(75, 192, 192)",
-                        lineTension: 0.1
-                    }]
-                },
-                options: {}
-            });
 </script>
 {% endblock%}
 

@@ -1,13 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="col-xs-10 col-sm-6 col-md-6">
-    <h2>Add Expenditure</h2>
     <div class="card card-style mb-2">
         <div class="card-body">
             <form action="" method="POST">
                 {{ form.csrf_token() }}
                 <fieldset class="form-group">
-                    <legend class="mb-4">Expenses And Incomes</legend>
+                    <h3><legend class="mb-4">Add Transactions</legend></h3>
                     <div class="form-group">
                         {{ form.amount.label(class="form-control-label") }}
                         {% if form.amount.errors %}

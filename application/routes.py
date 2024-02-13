@@ -41,22 +41,13 @@ def dashboard():
 
     dates = db.session.query(db.func.sum(IncomeExpenses.amount), IncomeExpenses.date).group_by(IncomeExpenses.date).order_by(IncomeExpenses.date).all()
 
-    income_category = []
-    for amounts, _ in category_comparison:
-        income_category.insert(0, amounts)
+    income_category = [[item[0], item[1]] for item in category_comparison]
         
 
     income_expense = []
     for total_amount, _ in income_vs_expense:
         income_expense.insert(0, total_amount)
-
     
-    ##
-    category_comparison = [[item[0], item[1]] for item in category_comparison]
-    print('\n\n\n\n', category_comparison, '\n\n\n\n\n')
-
-
-    ##
     over_time_expenditure = []
     dates_label = []
     for amount, date in dates:
@@ -65,8 +56,7 @@ def dashboard():
 
     return render_template('dashboard.html',
                             income_vs_expense=json.dumps(income_expense),
-                            income_category=category_comparison,
-                            # income_category=json.dumps(category_comparison),
+                            income_category=income_category,
                             over_time_expenditure=json.dumps(over_time_expenditure),
                             dates_label =json.dumps(dates_label)
                         )
