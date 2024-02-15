@@ -1,5 +1,4 @@
 from application import db
-from application import app
 from datetime import datetime
 import enum
 
@@ -7,12 +6,24 @@ import enum
 class IncomeExpenses(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(30), default = 'Income', nullable=False)
-    category = db.Column(db.String(30), nullable=False, default='Salary')
+    type = db.Column(db.String(30), default = 'income', nullable=False)
+    category = db.Column(db.String(30), nullable=False, default='rent')
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     amount = db.Column(db.Integer, nullable=False)
+
+
+    def __str__(self):
+        return self.id
+
+
+# with app.app_context():
+#     db.create_all()
+
+
+
     
 
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+
+
+
+
