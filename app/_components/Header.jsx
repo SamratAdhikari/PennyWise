@@ -10,8 +10,14 @@ const Header = () => {
     const { user, isSignedIn } = useUser();
 
     return (
-        <div className="p-5 flex justify-between items-center border shadow-md">
-            <Image src={"./logo.svg"} alt="logo" width={160} height={100} />
+        <div className="p-5 flex justify-between items-center border shadow-md bg-white">
+            <div className="flex items-center">
+                <Link href={"/"}>
+                    <span className="text-3xl text-blue-950 font-extrabold">
+                        PennyWise
+                    </span>
+                </Link>
+            </div>
             {isSignedIn ? (
                 <UserButton />
             ) : (

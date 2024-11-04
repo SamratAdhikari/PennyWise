@@ -40,7 +40,13 @@ const SideNav = () => {
 
     return (
         <div className="h-screen p-5 shadow-md border">
-            <Image src={"/logo.svg"} alt="logo" width={160} height={100} />
+            <div className="flex items-center">
+                <Link href={"/"}>
+                    <span className="text-3xl text-blue-950 font-extrabold">
+                        PennyWise
+                    </span>
+                </Link>
+            </div>
             <div className="mt-5">
                 {menuList.map((menu, index) => (
                     <Link href={menu.path} key={menu.id}>
